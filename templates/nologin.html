@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>未登录</title>
+    <script type="text/javascript">
+    function countDown(secs, surl) {
+        //alert(surl); 
+        var jumpTo = document.getElementById('jumpTo');
+        jumpTo.innerHTML = secs;
+        if (--secs > 0) {
+            setTimeout("countDown(" + secs + ",'" + surl + "')", 1000);
+        } else {
+            location.href = surl;
+        }
+    }
+    </script>
+</head>
+
+<body><h1>未登录  <span id="jumpTo">3</span>秒后自动跳转到登录页面</h1>
+    <script type="text/javascript">
+    countDown(3, 'http://127.0.0.1:8000/login');
+    </script>
+</body>
+
+</html>

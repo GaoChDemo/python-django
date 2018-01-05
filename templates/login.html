@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>	
+	<title>电信报表——登陆</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link href="/static/css/stylel.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+<body>
+	<div class="login">
+		<div class="login-top">
+			<h1>登 录</h1>
+			<form method="post" enctype="multipart/form-data" >
+                                            {% csrf_token %}
+			   {{ uf.username }}
+                                            {{ uf.password }}
+		  {% if message %}
+		<ul class="messages">
+		<li {% if message.tags %} class="{{ message.tags }}"{% endif %} > <h3>{{ message }}</h3> </li>
+		</ul>
+		{% endif %}
+		    
+		    <div class="forgot">
+		    	<input type="submit" value="登录">
+		    </div>
+            </form>
+		</div>
+		<div class="login-bottom">
+			<h3>电信报表</h3>
+		</div>
+	</div>	
+</body>
+</html>

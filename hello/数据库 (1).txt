@@ -1,0 +1,212 @@
+create table Product_Code_Table
+(productCode int NOT NULL PRIMARY KEY,
+productName varchar(125) NOT NULL,
+whetherUser varchar(125),
+whetherAccount varchar(125),
+whetherCard varchar(125),
+whetherSettlement varchar(125),
+whetherRetained varchar(125),
+whetherNotice varchar(125)
+);
+
+create table Account_income_Code_table
+(accountCode int NOT NULL PRIMARY KEY,
+accountName varchar(125) NOT NULL
+);
+
+create table Notice_income_Code_table
+(NoticeIncomeCode int NOT NULL PRIMARY KEY,
+NoticeIncomeName varchar(125) NOT NULL
+);
+
+create table etCode_table
+(etCode int NOT NULL PRIMARY KEY,
+etName varchar(125) NOT NULL
+);
+
+create table writeOffTypeCode_table
+(writeOffTypeCode int NOT NULL PRIMARY KEY,
+writeOffTypeName varchar(125) NOT NULL
+);
+
+create table payeeUseCode_table
+(payeeUseCode int NOT NULL PRIMARY KEY,
+payeeUseName varchar(125) NOT NULL
+);
+
+create table settlementOperatorCode_table
+(settlementOperatorCode int NOT NULL PRIMARY KEY,
+settlementOperatorName varchar(125) NOT NULL
+);
+
+create table settlementTypeCode_table
+(settlementTypeCode int NOT NULL PRIMARY KEY,
+settlementTypeName varchar(125) NOT NULL
+);
+
+create table Account_income_table
+(Account_income_ID int NOT NULL PRIMARY KEY,
+inputMonth varchar(125),
+etCode int,
+productCode int,
+accountCode int,
+inputMoneyCode int,
+FOREIGN KEY (productCode) REFERENCES Product_Code_Table(productCode),
+FOREIGN KEY (accountCode) REFERENCES Account_income_Code_table(accountCode)
+);
+
+create table Card_income_table
+(Card_income_ID int NOT NULL PRIMARY KEY,
+inputDate varchar(125),
+etCode int,
+productCode int,
+cardSaleNumber int,
+faceAmount int,
+totalAmount int,
+discountTotalAmount int,
+FOREIGN KEY (productCode) REFERENCES Product_Code_Table(productCode)
+);
+
+create table Set_between_networks_table
+(Set_between_networks_ID int NOT NULL PRIMARY KEY,
+settlementMonth varchar(125),
+etCode int,
+productCode int,
+settlementOperatorCode int,
+settlementTypeCode int,
+settlementAmount int,
+FOREIGN KEY (productCode) REFERENCES Product_Code_Table(productCode),
+FOREIGN KEY (settlementOperatorCode) REFERENCES settlementOperatorCode_table (settlementOperatorCode),
+FOREIGN KEY (settlementTypeCode) REFERENCES settlementTypeCode_table(settlementTypeCode)
+);
+
+create table Retained_income_table
+(Retained_income_ID int NOT NULL PRIMARY KEY,
+writeOffDate varchar(125),
+etCode int,
+productCode int,
+writeOffTypeCode int,
+writeOffAmount int,
+FOREIGN KEY (productCode) REFERENCES Product_Code_Table(productCode),
+FOREIGN KEY (writeOffTypeCode) REFERENCES writeOffTypeCode_table(writeOffTypeCode)
+);
+
+create table Notice_income_table
+(Notice_income_ID int NOT NULL PRIMARY KEY,
+bussinessCollectionDate varchar(125),
+etCode int,
+productCode int,
+NoticeIncomeCode int,
+bussinessIncomeAmount int,
+FOREIGN KEY (productCode) REFERENCES Product_Code_Table(productCode),
+FOREIGN KEY (NoticeIncomeCode) REFERENCES Notice_income_Code_table(NoticeIncomeCode)
+);
+
+insert into etCode_table values(000,'江西本部');
+insert into etCode_table values(740,'江西景德镇');
+insert into etCode_table values(750,'江西南昌');
+insert into etCode_table values(751,'江西吉安');
+insert into etCode_table values(752,'江西赣州');
+insert into etCode_table values(753,'江西新余');
+insert into etCode_table values(754,'江西鹰潭');
+insert into etCode_table values(755,'江西九江');
+insert into etCode_table values(756,'江西宜春');
+insert into etCode_table values(757,'江西上饶');
+insert into etCode_table values(758,'江西萍乡');
+insert into etCode_table values(759,'江西抚州');
+
+insert into Product_Code_Table values(120502,'固话-增值业务-800-国内','yes','yes','no','yes','yes','yes');
+insert into Product_Code_Table values(320113,'卡类-IP卡-省内IP电话卡-200卡','yes','yes','yes','no','no','yes');
+insert into Product_Code_Table values(320114,'卡类-IP卡-省内IP电话卡-300卡','yes','yes','yes','no','no','yes');
+insert into Product_Code_Table values(110101,'固话-基础业务-普通电话','yes','yes','no','yes','yes','yes');
+insert into Product_Code_Table values(110503,'固话-基础业务-公用电话-公话超市电话','yes','yes','no','yes','yes','yes');
+insert into Product_Code_Table values(420201,'数据业务-互联网接入服务-宽带接入-ADSL虚拟拨号','yes','yes','no','no','yes','yes');
+insert into Product_Code_Table values(420301,'数据业务-互联网接入服务-互联网普通专线接入','yes','yes','no','yes','yes','no');
+insert into Product_Code_Table values(430101,'数据业务-平台业务-IDC-主机托管','yes','yes','no','no','no','yes');
+
+
+insert into Account_income_Code_table values(4001,'主营业务收入-公众客户-月租费收入');
+insert into Account_income_Code_table values(4003,'主营业务收入-公众客户-本地区间通话费');
+insert into Account_income_Code_table values(4004,'主营业务收入-公众客户-本地拨号上网通信费');
+insert into Account_income_Code_table values(4002,'主营业务收入-公众客户-本地区内通话费');
+insert into Account_income_Code_table values(4005,'主营业务收入-公众客户-国内长途通信费');
+insert into Account_income_Code_table values(4006,'主营业务收入-公众客户-国际长途通信费');
+insert into Account_income_Code_table values(4007,'主营业务收入-公众客户-港澳台长途通信费');
+insert into Account_income_Code_table values(4008,'主营业务收入-公众客户-IP国内长途通信费');
+insert into Account_income_Code_table values(4009,'主营业务收入-公众客户-IP国际长途通信费');
+insert into Account_income_Code_table values(4010,'主营业务收入-公众客户-IP港澳台长途通信费');
+insert into Account_income_Code_table values(4011,'主营业务收入-公众客户-装移机工料费收入');
+insert into Account_income_Code_table values(4012,'主营业务收入-公众客户-开户费收入');
+insert into Account_income_Code_table values(4013,'主营业务收入-公众客户-网络使用费');
+insert into Account_income_Code_table values(4014,'主营业务收入-公众客户-一次性费用');
+insert into Account_income_Code_table values(4015,'主营业务收入-公众客户-标准资费收入');
+insert into Account_income_Code_table values(4020,'主营业务收入-公众客户-增值业务收入');
+insert into Account_income_Code_table values(4021,'主营业务收入-公众客户-其他类收入');
+insert into Account_income_Code_table values(4022,'主营业务收入-公众客户-折扣与折让');
+
+insert into Notice_income_Code_table values(0001,'主业-公众-装移机工料费-普通电话');
+insert into Notice_income_Code_table values(0027,'主业-公众-开户费-普通电话');
+insert into Notice_income_Code_table values(0053,'主业-公众-一次性费用-普通电话');
+insert into Notice_income_Code_table values(0239,'主业-公众-一次性费用-公用电话-公话超市电话');
+insert into Notice_income_Code_table values(0247,'预收账款-用户预存款-公用电话-公话超市电话');
+insert into Notice_income_Code_table values(0035,'主业-公众-开户费-公用电话-公话超市电话');
+insert into Notice_income_Code_table values(0024,'主业-公众-装移机工料费-IDC-主机托管');
+insert into Notice_income_Code_table values(0050,'主业-公众-开户费-IDC-主机托管');
+insert into Notice_income_Code_table values(0232,'主业-公众-一次性费用-IDC-主机托管');
+insert into Notice_income_Code_table values(0014,'主业-公众-装移机工料费-宽带-ADSL虚拟拨号');
+
+insert into writeOffTypeCode_table values(100,'预收账款-用户预存款');
+insert into writeOffTypeCode_table values(110,'预收账款-缴费卡款');
+insert into writeOffTypeCode_table values(120,'预收账款-预付费卡款-面值');
+insert into writeOffTypeCode_table values(130,'预收账款-预付费卡款-销售折扣');
+insert into writeOffTypeCode_table values(140,'预收账款-预收出租商品租金');
+insert into writeOffTypeCode_table values(150,'预收账款-预收代办工程款');
+insert into writeOffTypeCode_table values(160,'预收账款-其他-其他');
+
+insert into payeeUseCode_table values(1,'保证金');
+insert into payeeUseCode_table values(2,'押金');
+insert into payeeUseCode_table values(3,'滞纳金');
+insert into payeeUseCode_table values(4,'欠费收回');
+insert into payeeUseCode_table values(5,'预收帐款');
+insert into payeeUseCode_table values(6,'预存转收入');
+insert into payeeUseCode_table values(7,'折让金额');
+
+insert into settlementOperatorCode_table values(1,'电信');
+insert into settlementOperatorCode_table values(2,'移动');
+insert into settlementOperatorCode_table values(3,'联通');
+
+insert into settlementTypeCode_table values(1,'结算支出');
+insert into settlementTypeCode_table values(2,'结算收入');
+
+
+insert into Account_income_table values(1111,'1月',000,120502,4002,16400);
+insert into Account_income_table values(1112,'3月',750,110101,4004,21000);
+insert into Account_income_table values(1113,'5月',756,110503,4006,10310);
+insert into Account_income_table values(1114,'8月',757,420301,4011,10230);
+
+insert into Card_income_table values(1121,'11月',750,120502,11,10200,15000,3000);
+insert into Card_income_table values(1122,'10月',758,420201,11,10300,20000,6000);
+insert into Card_income_table values(1123,'6月',752,430101,11,10040,30000,3500);
+insert into Card_income_table values(1124,'4月',740,430101,11,10050,20000,2600);
+
+
+insert into Set_between_networks_table values(1131,'1月',755,420201,1,1,23000);
+insert into Set_between_networks_table values(1132,'2月',753,320113,2,2,33030);
+insert into Set_between_networks_table values(1133,'3月',752,430101,3,2,43300);
+insert into Set_between_networks_table values(1134,'4月',757,120502,3,1,36030);
+insert into Set_between_networks_table values(1135,'5月',758,120502,2,1,34300);
+
+
+insert into Retained_income_table values(1141,'11月',750,110503,110,23230);
+insert into Retained_income_table values(1142,'2月',000,120502,150,23450);
+insert into Retained_income_table values(1143,'5月',759,320113,140,45623);
+insert into Retained_income_table values(1144,'3月',755,430101,160,34612);
+insert into Retained_income_table values(1145,'7月',757,120502,110,34623);
+insert into Retained_income_table values(1146,'9月',752,110503,120,34623);	
+
+
+insert into Notice_income_table values(1151,'4月',750,110503,0053,27830);
+insert into Notice_income_table values(1152,'5月',754,120502,0232,23006);
+insert into Notice_income_table values(1153,'5月',752,110503,0014,33070);
+insert into Notice_income_table values(1154,'5月',751,110503,0001,33000);
+insert into Notice_income_table values(1155,'5月',754,430101,0247,33600);

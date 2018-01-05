@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>电信报表-出账收入基本信息</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <script type="text/javascript" src="/static/js/fun.js" /></script>
+</head>
+
+<body onload="hideMand()" >
+    <div class="pname">
+        <h1>电信报表</h1>
+    </div>
+    <div id="homebar">
+        <ul id="navigationMenu" style="float:left; padding-left: 10px;">
+            <li>
+                <a class="top" href="#">
+            <span>↑</span>
+        </a>
+            </li>
+            <li>
+                <a class="home" href="http://127.0.0.1:8000/report" style="background: #7da315">
+            <span>出账收入基本信息</span>
+        </a>
+            </li>
+            <li>
+                <a class="about" href="http://127.0.0.1:8000/card" style="background: #1e8bb4">
+            <span>卡销售收入基本信息</span>
+        </a>
+            </li>
+            <li>
+                <a class="services" href="http://127.0.0.1:8000/setbet" style="background: #5a3517">
+            <span>网间结算基本信息</span>
+         </a>
+            </li>
+            <li>
+                <a class="portfolio" href="http://127.0.0.1:8000/retained" style="background: #d0a525">
+            <span>预存转收入基本信息</span>
+        </a>
+            </li>
+            <li>
+                <a class="contact" href="http://127.0.0.1:8000/notice" style="background: #af1e83">
+            <span>通知单收入基本信息</span>
+        </a>
+            </li>
+        </ul>
+    </div>
+    <div id="main">
+        <div class="user">
+            <span name="UserName">{{ username }}</span>
+            <a href="http://127.0.0.1:8000/logout">退出</a><br><br>
+
+             <a href="/xlwt_report"" onclick="xlwtok();" class="btn-two cyan small">导出</a>
+        </div>
+        <div class="fd">
+            <div class="search bar3">
+                <form>
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="搜索">
+                </form>
+            </div>
+            <div class="tableName">
+                <h3 style="color: #7da315;">出账收入基本信息</h3>
+            </div>
+            <div class="Add">
+                <a href="#" onclick="showPopup_Adda();" class="btn-two green small">添加</a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped" id="myTable" >
+        <thead>
+            <tr>
+                <th name="AccountNumber">出账单号</th>
+                <th style="width: 90px;">录入月份</th>
+                <th>城市</th>
+                <th>产品</th>
+                <th>出账类型</th>
+                <th>录入金额</th>
+                <th>是否已核实</th>
+                <th style="width: 170px">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for list in datas %}
+                <tr>
+                    {% for data in list %}
+                    <td>{{ data }}</td>
+                    {% endfor %}
+                    <td>
+                    <a href="#" class="btn-two purple mini" onclick="showPopup_Modificationa(this);">修改</a>
+                    <a href="#" class="btn-two red mini" onclick="return popupcontentDela(this)">删除</a>
+                    <a href="#" class="btn-two bc mini" onclick="return popupcontentCa(this)">核实</a>
+                    </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+    <div id="popupcontentAdd">
+        <div id="add">
+            <div id="triangle"></div>
+            <a href="#" onclick="hidePopup_Add();" class="btn-two green mini" style="float: right;">X</a>
+            
+            <form name="Add" method="post" action="/add_report">
+                <br>
+                <br>
+                {% csrf_token %}
+                    <div  class="formstyle">
+                    <span>出账单号：</span><input class="inputStyle" id="AccountNumber" name="AccountNumber" readonly="true" value="自动生成" />
+                </div>
+                 <div  class="formstyle">
+                <span>录入月份：</span><input class="inputStyle" id="inputMonth" name="inputMonth" type="month" />
+                  </div>
+                  <div  class="formstyle">
+                <span>城市：</span>
+                    <select class="selectStyle" id="ctCode" name="ctCode" type="text" >
+                        {% for key, value in et.items %} 
+                        <option value ="{{ key }}">{{ value }} </option>
+                        {% endfor %} 
+                    </select>
+               </div>
+                 <div  class="formstyle">
+                <span>产品:</span>
+                    <select class="selectStyle" id="productCode" name="productCode" type="text" >
+                        {% for key, value in pc.items %} 
+                        <option value ="{{ key }}">{{ value }} </option>
+                        {% endfor %} 
+                    </select>
+           </div>
+                 <div  class="formstyle">
+                <span>出账类型:</span>
+                      <select class="selectStyle" id="accountCode" name="accountCode" type="text" >
+                        {% for key, value in ac.items %} 
+                        <option value ="{{ key }}">{{ value }} </option>
+                        {% endfor %} 
+                    </select>
+             </div>
+                 <div  class="formstyle">
+                <span>录入金额:</span>
+                    <input class="inputStyle" id="inputMoneyCode" name="inputMoneyCode" type="text" maxlength="9" />
+           </div>
+           <br>
+                <input class="submitStyle" type="submit" onclick="return addoka()" value="确定" />
+            </form>
+        </div>
+    </div>
+
+    <div id="popupcontentModification">
+        <div id="Modification">
+            <div id="triangle1"></div>
+            <a href="#" onclick="hidePopup_Modification();" class="btn-two purple mini" style="float: right;">X</a>
+            
+            <form name="Modification" method="post" action="/mod_report">
+                <br>
+                <br>
+                {% csrf_token %}
+                <div  class="formstyle">
+                    <span>出账单号：</span><input class="inputStyle" id="mAccountNumber" name="mAccountNumber" readonly="true" value="自动生成" />
+                </div>
+                 <div  class="formstyle">
+                <span>录入月份：</span><input class="inputStyle" id="minputMonth" name="minputMonth" type="month" />
+                  </div>
+                  <div  class="formstyle">
+                <span>城市:</span>
+                    <select class="selectStyle" id="mctCode" name="mctCode" type="text">
+
+                        {% for key, value in et.items %} 
+                        <option value ="{{ key }}">{{ value }} </option>
+                        {% endfor %} 
+                    </select>
+               </div>
+                 <div  class="formstyle">
+                <span>产品:</span>
+                    <select class="selectStyle" id="mproductCode" name="mproductCode" type="text" >
+                        {% for key, value in pc.items %} 
+                        <option value ="{{ key }}">{{ value }} </option>
+                        {% endfor %} 
+                    </select>
+           </div>
+                 <div  class="formstyle">
+                <span>出账类型:</span>
+                      <select class="selectStyle" id="maccountCode" name="maccountCode" type="text" >
+                        {% for key, value in ac.items %} 
+                        <option value ="{{ key }}">{{ value }} </option>
+                        {% endfor %} 
+                    </select>
+             </div>
+                 <div  class="formstyle">
+                <span>录入金额:</span>
+                    <input class="inputStyle" id="minputMoneyCode" name="minputMoneyCode" type="text" maxlength="9"  />
+           </div>
+           <br>
+                <input class="submitStyle1" type="submit" onclick="return modoka()" value="确定" />
+            </form>
+        </div>
+    </div>
+
+      <div id="popupcontentDel">
+        <div id="del">
+            <div id="triangle2"></div>
+            <a href="#" onclick="hide_del();" class="btn-two red mini" style="float: right;">X</a>
+            
+            <form name="del"  method="post" action="/del_report">
+                <br>
+                <br>
+                <p>出账单号：<input class="inputStyle" id="dAccountNumber" name="dAccountNumber"  readonly="true" value="自动生成" /></p>
+                <br>
+                <input class="submitStyle2" type="submit" onclick="delok()" value="确定" />
+            </form>
+        </div>
+    </div>
+
+
+    <div id="popupcontentH">
+        <div id="H">
+            <div id="triangle3"></div>
+            <a href="#" onclick="hidePopupC();" class="btn-two bc mini" style="float: right;">X</a>
+            
+            <form name="h" method="post" action="/h_report">
+                <br>
+                <br>
+                {% csrf_token %}
+                    <div  class="formstyle">
+                    <span>出账单号：</span><input class="inputStyle" id="hAccountNumber" name="hAccountNumber" readonly="true" value="自动生成" />
+                </div>
+                 <div  class="formstyle">
+                <span>录入月份：</span><input class="inputStyle" id="hinputMonth" name="hinputMonth"  readonly="true" type="month" />
+                  </div>
+                  <div  class="formstyle">
+                <span>城市：</span>
+                    <input class="inputStyle" id="hctCode" name="hctCode"  readonly="true" />
+               </div>
+                 <div  class="formstyle">
+                <span>产品:</span>
+                    <input class="inputStyle" id="hproductCode" name="hproductCode"  readonly="true" />
+           </div>
+                 <div  class="formstyle">
+                <span>出账类型:</span>
+                      <input class="inputStyle" id="haccountCode" name="haccountCode"  readonly="true" />
+             </div>
+                 <div  class="formstyle">
+                <span>录入金额:</span>
+                    <input class="inputStyle" id="hinputMoneyCode" name="hinputMoneyCode"  readonly="true" />
+           </div>
+           <br>
+                <input class="submitStyle3" type="submit" onclick="hok()" value="核实" />
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

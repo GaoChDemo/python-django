@@ -1,0 +1,47 @@
+	产品编码表 Product_Code_Table
+产品编码 productCode	//主链
+产品名称 productName
+是否使用 whetherUse
+是否出账收入 whetherAccount
+是否卡销售 whetherCard
+是否网间结算 whetherSettlement
+是否预存转收入 whetherRetained
+是否通知单 whetherNotice
+
+	出帐收入类型编码表 Account_income_Code_table
+出帐收入类型编码 accountCode	//主链
+出帐收入类型名称 accountName
+
+	通知单收入类型编码表 Notice_income_Code_table
+通知单收入类型编码 NoticeIncomeCode	//主链
+通知单收入类型名称 NoticeIncomeName
+
+	城市编码 etCode_table
+城市编码 etCode //主链
+城市名称 etName
+
+	销账类型编码表 writeOffTypeCode_table
+销账类型编码 writeOffTypeCode	//主链
+销售类新名称 writeOffTypeName
+	
+	收款用途编码表 payeeUseCode_table
+收款用途编码 payeeUseCode	//主链
+收款用途名称 payeeUseName
+
+	结算运营商编码表 settlementOperatorCode_table
+结算运营商编码 settlementOperatorCode	//主链
+结算运营商名称 settlementOperatorName
+
+	结算类型编码表 settlementTypeCode_table
+结算类型编码 settlementTypeCode	//主链
+结算类型名称 settlementTypeName
+	
+	
+
+
+
+
+
+
+
+

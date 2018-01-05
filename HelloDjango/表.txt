@@ -1,0 +1,52 @@
+	出账收入基本信息表 Account_income_table
+录入月份 inputMonth
+城市编码 etCode		//外链
+产品编码 productCode		//外链
+出账类型编码 accountCode	//外链
+录入金额 inputMoneyCode
+
+	卡销售收入基本信息 Card_income_table
+录入日期 inputDate
+城市编码 etCode		//外链
+产品编码 productCode		//外链
+卡销售编码 cardSaleNumber	//??
+面值金额 faceAmount
+卡总金额 totalAmount
+折扣后总金额 discountTotalAmount
+
+	网间结算基本信息 Set_between_networks_table
+结算月份 settlementMonth
+城市编码 etCode		//外链
+产品编码 productCode		//外链
+结算运营商编码 settlementOperatorCode	//外链
+结算类型编码 settlementTypeCode		//外链
+结算金额 settlementAmount
+
+	预存转收入收入基本信息  Retained_income_table
+销账日期 writeOffDate
+城市编码 etCode		//外链
+产品编码 productCode		//外链
+销账类型编码 writeOffTypeCode	//外链
+销帐金额 writeOffAmount
+
+	通知单收入基本信息 Notice_income_table
+营业收款日期 bussinessCollectionDate
+城市编码 etCode		//外链
+产品编码 productCode		//外链
+通知单收入编码 NoticeIncomeCode	//外链
+营业收入金额 bussinessIncomeAmount
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

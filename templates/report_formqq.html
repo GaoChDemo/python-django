@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/styler.css" />
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="js" href="/static/js/funr.js" />
+</head>
+
+<body>
+	<div class="pname">
+		<h1>电信报表</h1>
+    </div>
+    <div id="homebar">
+	<ul id="navigationMenu" style="float:left; padding-left: 0px;">
+    <li>
+    	<a class="top" href="#">
+            <span>↑</span>
+        </a>
+    </li>
+    <li>  
+	    <a class="home" href="#">
+            <span>出账收入基本信息</span>
+        </a>
+    </li>
+    
+    <li>
+    	<a class="about" href="#">
+            <span>出账收入基本信息</span>
+        </a>
+    </li>
+    
+    <li>
+	     <a class="services" href="#">
+            <span>网间结算基本信息</span>
+         </a>
+    </li>
+    
+    <li>
+    	<a class="portfolio" href="#">
+            <span>预存转收入收入基本信息</span>
+        </a>
+    </li>
+    
+    <li>
+    	<a class="contact" href="#">
+            <span>预存转收入收入基本信息</span>
+        </a>
+    </li>
+</ul>
+</div>
+  <div id="main">
+  	<div class="fd">
+         	<div class="search bar3">
+		        <form>
+		            <input type="text" id="txtSearch" value="请输入关键字">
+		            <button type="text"></button>
+		        </form>
+		    </div>
+
+        	<div class="tableName">
+        	    <h3>出账收入基本信息</h3>
+        	</div>
+
+        	<div class="Add">
+        		<a href="#" class="btn-two green small" onclick="createTable()">添加</a>
+        	</div>
+        </div>
+    </div>
+           <table class="table table-striped"  id="myTable">	
+          
+            <thead>
+                <tr>
+                    <th style="width: 80px;">录入月份</th>
+                    <th>城市编码</th>
+                    <th>产品编码</th>
+                    <th>出账类型编码</th>
+                    <th>录入金额</th>
+                    <th style="width: 106px">操作</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for list in datas %}
+                <tr>
+                    {% for data in list %}
+                    <td>{{ data }}</td>
+                    {% endfor %}
+                    <td>
+                        <a href="#" class="btn-two purple mini">修改</a>
+                        <a href="#" class="btn-two red mini" onclick="delRow()">删除</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+</body>
+
+</html>
